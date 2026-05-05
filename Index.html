@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My App Hub</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #0f172a;
+    color: white;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    background: #1e293b;
+    padding: 10px;
+}
+
+nav button {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    background: #334155;
+    color: white;
+}
+
+section {
+    display: none;
+    padding: 20px;
+    text-align: center;
+}
+
+.active {
+    display: block;
+}
+
+/* cards */
+.card {
+    background: #1e293b;
+    padding: 15px;
+    margin: 10px auto;
+    width: 300px;
+    border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <button onclick="show('home')">Home</button>
+    <button onclick="show('tasks')">Tasks</button>
+    <button onclick="show('chat')">Chat</button>
+    <button onclick="show('music')">Music</button>
+</nav>
+
+<!-- HOME -->
+<section id="home" class="active">
+    <h1>🚀 App Hub</h1>
+    <p>Your mini multi-tool web app</p>
+</section>
+
+<!-- TASKS -->
+<section id="tasks">
+    <h2>🅰️ Task Manager</h2>
+    <input id="taskInput" placeholder="New task">
+    <button onclick="addTask()">Add</button>
+    <div id="taskList"></div>
+</section>
+
+<!-- CHAT -->
+<section id="chat">
+    <h2>🅱️ Chat UI</h2>
+    <div class="card">User: Hey 👋</div>
+    <div class="card">You: Hello!</div>
+</section>
+
+<!-- MUSIC -->
+<section id="music">
+    <h2>🅲 Music Player</h2>
+    <p>▶ Play / Pause (UI only)</p>
+    <button onclick="alert('Playing music...')">Play</button>
+</section>
+
+<script>
+function show(id){
+    document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+
+// TASKS
+function addTask(){
+    let input = document.getElementById("taskInput");
+    if(input.value === "") return;
+
+    let div = document.createElement("div");
+    div.className = "card";
+    div.innerText = input.value;
+
+    document.getElementById("taskList").appendChild(div);
+    input.value = "";
+}
+</script>
+
+</body>
+</html>
