@@ -1,36 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>My App Hub</title>
+<meta charset="UTF-8">
+<title>App Hub Pro</title>
 
 <style>
 body {
     margin: 0;
     font-family: Arial;
-    background: #0f172a;
+    background: #0b1220;
     color: white;
 }
 
+/* NAV */
 nav {
     display: flex;
     justify-content: center;
-    background: #1e293b;
-    padding: 10px;
+    background: rgba(30,41,59,0.9);
+    padding: 12px;
+    position: sticky;
+    top: 0;
 }
 
 nav button {
     margin: 5px;
-    padding: 10px;
+    padding: 10px 14px;
     border: none;
     cursor: pointer;
-    border-radius: 6px;
+    border-radius: 8px;
     background: #334155;
     color: white;
+    transition: 0.2s;
 }
 
+nav button:hover {
+    background: #3b82f6;
+}
+
+/* SECTIONS */
 section {
     display: none;
-    padding: 20px;
+    padding: 30px;
     text-align: center;
 }
 
@@ -38,13 +48,42 @@ section {
     display: block;
 }
 
-/* cards */
+/* CARDS */
 .card {
-    background: #1e293b;
+    background: rgba(30,41,59,0.8);
     padding: 15px;
     margin: 10px auto;
-    width: 300px;
-    border-radius: 10px;
+    width: 320px;
+    border-radius: 12px;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+/* INPUT */
+input {
+    padding: 10px;
+    width: 70%;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+
+button.action {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: #3b82f6;
+    color: white;
+    cursor: pointer;
+}
+
+/* GLASS EFFECT HEADER */
+h1 {
+    margin-top: 20px;
+    color: #60a5fa;
 }
 </style>
 </head>
@@ -60,30 +99,42 @@ section {
 
 <!-- HOME -->
 <section id="home" class="active">
-    <h1>🚀 App Hub</h1>
-    <p>Your mini multi-tool web app</p>
+    <h1>🚀 App Hub Pro</h1>
+    <p>All-in-one mini web app system</p>
 </section>
 
 <!-- TASKS -->
 <section id="tasks">
-    <h2>🅰️ Task Manager</h2>
-    <input id="taskInput" placeholder="New task">
-    <button onclick="addTask()">Add</button>
+    <h1>🅰️ Task Manager</h1>
+
+    <input id="taskInput" placeholder="Enter task">
+    <button class="action" onclick="addTask()">Add</button>
+
     <div id="taskList"></div>
 </section>
 
 <!-- CHAT -->
 <section id="chat">
-    <h2>🅱️ Chat UI</h2>
-    <div class="card">User: Hey 👋</div>
-    <div class="card">You: Hello!</div>
+    <h1>🅱️ Chat UI</h1>
+
+    <div id="chatBox">
+        <div class="card">User: Hello 👋</div>
+        <div class="card">You: Hi!</div>
+    </div>
+
+    <input id="chatInput" placeholder="Type message">
+    <button class="action" onclick="sendMsg()">Send</button>
 </section>
 
 <!-- MUSIC -->
 <section id="music">
-    <h2>🅲 Music Player</h2>
-    <p>▶ Play / Pause (UI only)</p>
-    <button onclick="alert('Playing music...')">Play</button>
+    <h1>🎧 Music Player</h1>
+
+    <div class="card">
+        🎵 Chill Beats
+        <br><br>
+        <button class="action" onclick="alert('Playing music...')">Play</button>
+    </div>
 </section>
 
 <script>
@@ -92,7 +143,7 @@ function show(id){
     document.getElementById(id).classList.add("active");
 }
 
-// TASKS
+/* TASKS */
 function addTask(){
     let input = document.getElementById("taskInput");
     if(input.value === "") return;
@@ -102,6 +153,19 @@ function addTask(){
     div.innerText = input.value;
 
     document.getElementById("taskList").appendChild(div);
+    input.value = "";
+}
+
+/* CHAT */
+function sendMsg(){
+    let input = document.getElementById("chatInput");
+    if(input.value === "") return;
+
+    let div = document.createElement("div");
+    div.className = "card";
+    div.innerText = "You: " + input.value;
+
+    document.getElementById("chatBox").appendChild(div);
     input.value = "";
 }
 </script>
